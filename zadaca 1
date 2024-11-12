@@ -1,0 +1,70 @@
+/*За дадена низа од N цели броеви, да се избришат елементите со вредност помала од просекот на сите елементи во низата.
+На пример за низата 1, 2, 3, 4, 5 просекот е (1 + 2 + 3 + 4 + 5) / 5 = 15 / 5 = 3, што значи треба да се избришат елементите 1 и 2, што значи низата после оваа трансформација ќе биде 3, 4, 5.
+
+Влез: Првиот број од влезот е бројот на елементи во низата N, а потоа во следниот ред се дадени самите елементи одделени со празно место.
+
+Излез: Низата пред и после направената трансформација.
+
+input
+5
+1 2 3 4 5
+output
+{1,2,3,4,5}
+{3,4,5}
+
+input
+14
+99 60 11 99 88 3 47 24 97 54 56 89 82 31
+output
+{99,60,11,99,88,3,47,24,97,54,56,89,82,31}
+{99,60,99,88,97,89,82}
+
+*/
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int a[] = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += a[i];
+        }
+        double avg = sum * 1.0 / n;
+        int brElem=0;
+
+        for (int i = 0; i < n; i++) {
+            if (a[i]>=avg){
+                brElem++;
+            }
+        }
+
+        int newArray[]=new int[brElem];
+        int idx=0;
+        for (int i = 0; i < n; i++) {
+            if (a[i]>=avg){
+                newArray[idx++]=a[i];
+            }
+        }
+
+        System.out.print("{");
+        for (int i = 0; i < n-1; i++) {
+            System.out.print(a[i]+",");
+        }
+        System.out.println(a[n-1]+"}");
+       
+        System.out.print("{");
+        for (int i = 0; i < brElem-1; i++) {
+            System.out.print(newArray[i]+",");
+        }
+        System.out.println(newArray[brElem-1]+"}");
+
+    }
+
+}
